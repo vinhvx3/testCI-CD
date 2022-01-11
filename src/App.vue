@@ -38,6 +38,8 @@ export default {
     if (localStorage.access_token) {
       this.$store.dispatch("sendToken", localStorage.access_token);
     }
+
+    console.log('hiiiiiii');
   },
 };
 </script>
