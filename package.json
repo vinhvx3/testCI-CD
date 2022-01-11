@@ -10,7 +10,7 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "backend": "json-server --watch db.json --port 5000",
-    "test": "npm test.js"
+    "test": "node test.js"
   },
   "dependencies": {
     "bootstrap": "^5.1.3",
