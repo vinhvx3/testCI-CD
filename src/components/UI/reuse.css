@@ -1,0 +1,31 @@
+.container__custom {
+  width: 640px;
+  margin: 30px auto 10px;
+  overflow: auto;
+  min-height: 600px;
+  border: 1px solid steelblue;
+  padding: 30px;
+  border-radius: 5px;
+}
+.form-control__custom {
+  width: 100%;
+  align-items: center;
+  margin: 0 auto;
+  border: none;
+}
+.form-control__custom label {
+  display: block;
+  text-align: left;
+}
+.form-control__custom input {
+  width: 100%;
+  height: 44px;
+  padding: 3px 7px;
+  font-size: 17px;
+  border: 2px solid #dce0e3;
+  border-radius: 25px;
+  margin-top: 10px;
+}
+.form-control__custom input:focus {
+  outline: none;
+}
