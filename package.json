@@ -1,0 +1,19 @@
+{
+  "name": "testci-cd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinhvx3/testCI-CD.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vinhvx3/testCI-CD/issues"
+  },
+  "homepage": "https://github.com/vinhvx3/testCI-CD#readme"
+}
