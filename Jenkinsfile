@@ -10,7 +10,7 @@ pipeline {
     stage("Test") {
       agent {
           docker {
-            image 'nodejs:lasted'
+            image 'node:12-alpine'
             args '-u 0:0 -v /tmp:/root/.cache'
           }
       }
