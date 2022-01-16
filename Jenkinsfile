@@ -1,48 +1,40 @@
-pipeline {
+pipeline{
 
-  agent none
+	agent {label 'linux'}
 
-  environment {
-    DOCKER_IMAGE = "vinhvo2103/test-jenkin001"
-  }
+	environment {
+		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+	}
 
-  stages {
-    stage("Test") {
-      agent {
-          docker {
-            image 'node:12-alpine'
-            args '-u 0:0 -v /tmp:/root/.cache'
-          }
-      }
-      steps {
-        sh "echo test"
-      }
-    }
+	stages {
+	    
 
-    stage("build") {
-      steps {
-        sh "sudo docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} . "
-        sh "sudo docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
-        sh "sudo docker image ls | grep ${DOCKER_IMAGE}"
-        withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-            sh 'echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin'
-            sh "sudo docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
-            sh "sudo docker push ${DOCKER_IMAGE}:latest"
-        }
+		stage('Build') {
 
-        //clean to save disk
-        sh "sudo docker image rm ${DOCKER_IMAGE}:${DOCKER_TAG}"
-        sh "sudo docker image rm ${DOCKER_IMAGE}:latest"
-      }
-    }
-  }
+			steps {
+				sh 'docker build -t thetips4you/nodeapp_test:latest .'
+			}
+		}
 
-  post {
-    success {
-      echo "SUCCESSFUL"
-    }
-    failure {
-      echo "FAILED"
-    }
-  }
+		stage('Login') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+
+		stage('Push') {
+
+			steps {
+				sh 'docker push thetips4you/nodeapp_test:latest'
+			}
+		}
+	}
+
+	post {
+		always {
+			sh 'docker logout'
+		}
+	}
+
 }
